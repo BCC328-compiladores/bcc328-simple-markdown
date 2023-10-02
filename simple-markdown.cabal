@@ -1,0 +1,74 @@
+cabal-version:      3.0
+name:               simple-markdown
+version:            0.1.0.0
+-- synopsis:
+-- description:
+license:            BSD-2-Clause
+license-file:       LICENSE
+author:             Rodrigo Ribeiro
+maintainer:         rodrigogribeiro@gmail.com
+-- copyright:
+category:           Language
+build-type:         Simple
+extra-doc-files:    CHANGELOG.md
+-- extra-source-files:
+
+common warnings
+    ghc-options: -Wall
+
+library
+    import:           warnings
+    exposed-modules:
+      Markup.Arguments.OptionsParser
+      Markup.Language.Env
+      Markup.Language.Frontend
+      Markup.Language.Parser
+      Markup.Language.Semantics
+      Markup.Language.Syntax
+      Markup.Pipeline.CompilerPipeline
+      Markup.Printer.Backend
+      Markup.Printer.Html
+      Markup.Printer.Html.Internal
+    -- other-modules:
+    -- other-extensions:
+    build-depends: base ^>=4.18.0.0
+                 , megaparsec
+                 , parser-combinators
+                 , optparse-applicative
+                 , bytestring
+                 , filepath
+                 , directory
+                 , process
+                 , mtl
+                 , containers
+
+    hs-source-dirs:   src
+    default-language: Haskell2010
+
+executable simple-markdown
+    import:           warnings
+    main-is:          Main.hs
+    -- other-modules:
+    -- other-extensions:
+    build-depends:
+        base ^>=4.18.0.0,
+        simple-markdown
+
+    hs-source-dirs:   app
+    default-language: Haskell2010
+
+test-suite simple-markdown-test
+    import:           warnings
+    default-language: Haskell2010
+    -- other-modules:
+    -- other-extensions:
+    type:             exitcode-stdio-1.0
+    hs-source-dirs:   test
+    main-is:          Tests.hs
+    build-depends:
+        base ^>=4.18.0.0,
+        bytestring,
+        filepath,
+        tasty,
+        tasty-golden,
+        simple-markdown
